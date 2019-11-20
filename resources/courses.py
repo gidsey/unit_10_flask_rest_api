@@ -63,6 +63,12 @@ class Course(Resource):
         return jsonify({'title': 'Python Basics'})
 
     def delete(self, id):
+        # args = self.reqparse.parse_args()
+        try:
+            course = models.Course.get(models.Course.id == id)
+        except models.DoesNotExist:
+            abort(404)
+        course.delete().where(models.Course.id == id).execute()
         return jsonify({'title': 'Python Basics'})
 
 
