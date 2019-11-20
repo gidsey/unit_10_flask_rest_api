@@ -1,7 +1,6 @@
 from flask import jsonify, Blueprint, abort
 
 from flask_restful import Resource, Api, reqparse, inputs
-from playhouse.flask_utils import get_object_or_404
 
 import models
 
@@ -56,16 +55,11 @@ class Course(Resource):
 
     def put(self, id):
         args = self.reqparse.parse_args()
-        # course = models.Course.select().where(models.Course.id == id)
-
         try:
             course = models.Course.get(models.Course.id == id)
-            print(course)
         except models.DoesNotExist:
             abort(404)
-
-        print(course.title)
-
+        course.update(**args).execute()
         return jsonify({'title': 'Python Basics'})
 
     def delete(self, id):
