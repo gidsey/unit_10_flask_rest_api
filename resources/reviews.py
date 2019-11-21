@@ -10,12 +10,14 @@ class ReviewList(Resource):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument(
             'course',
+            type=inputs.positive,
             required=True,
             help="No course ID provided",
             location=['form', 'json']
         )
         self.reqparse.add_argument(
             'rating',
+            type=inputs.int_range(1,5),
             required=True,
             help="No course rating provided",
             location=['form', 'json']
@@ -23,8 +25,11 @@ class ReviewList(Resource):
         self.reqparse.add_argument(
             'comment',
             required=False,
-            location=['form', 'json']
+            nullable=True,
+            location=['form', 'json'],
+            default=''
         )
+        super().__init__()
 
     def get(self):
         return jsonify({'reviews': [{'course': 1, 'rating': 5}]})
@@ -61,6 +66,7 @@ class Review(Resource):
             required=False,
             location=['form', 'json']
         )
+        super().__init__()
 
     def get(self, id):
         return jsonify({'course': 1, 'rating': 5})
