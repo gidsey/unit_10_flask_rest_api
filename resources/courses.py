@@ -52,7 +52,7 @@ class CourseList(Resource):
     def post(self):
         args = self.reqparse.parse_args()
         course = models.Course.create(**args)
-        return add_reviews(course)
+        return add_reviews(course), 201, {'location': url_for('resources.courses.course', id=course.id)}
 
 
 class Course(Resource):
@@ -86,13 +86,9 @@ class Course(Resource):
                 {'location': url_for('resources.courses.course', id=id)})
 
     def delete(self, id):
-        # args = self.reqparse.parse_args()
-        try:
-            course = models.Course.get(models.Course.id == id)
-        except models.DoesNotExist:
-            abort(404)
-        course.delete().where(models.Course.id == id).execute()
-        return jsonify({'title': 'Python Basics'})
+        query = models.Course.delete().where(models.Course.id == id)
+        query.execute()
+        return '', 204, {'location': url_for('resources.courses.courses')}
 
 
 courses_api = Blueprint('resources.courses', __name__)
