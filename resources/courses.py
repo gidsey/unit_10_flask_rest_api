@@ -76,24 +76,23 @@ class Course(Resource):
     @marshal_with(course_fields)
     def get(self, id):
         return add_reviews(course_or_404(id))
-    #
-    # def put(self, id):
-    #     args = self.reqparse.parse_args()
-    #     try:
-    #         course = models.Course.get(models.Course.id == id)
-    #     except models.Course.DoesNotExist:
-    #         abort(404)
-    #     course.update(**args).execute()
-    #     return jsonify({'title': 'Python Basics'})
-    #
-    # def delete(self, id):
-    #     # args = self.reqparse.parse_args()
-    #     try:
-    #         course = models.Course.get(models.Course.id == id)
-    #     except models.DoesNotExist:
-    #         abort(404)
-    #     course.delete().where(models.Course.id == id).execute()
-    #     return jsonify({'title': 'Python Basics'})
+
+    @marshal_with(course_fields)
+    def put(self, id):
+        args = self.reqparse.parse_args()
+        query = models.Course.update(**args).where(models.Course.id == id)
+        query.execute()
+        return (add_reviews(models.Course.get(models.Course.id == id)), 200,
+                {'location': url_for('resources.courses.course', id=id)})
+
+    def delete(self, id):
+        # args = self.reqparse.parse_args()
+        try:
+            course = models.Course.get(models.Course.id == id)
+        except models.DoesNotExist:
+            abort(404)
+        course.delete().where(models.Course.id == id).execute()
+        return jsonify({'title': 'Python Basics'})
 
 
 courses_api = Blueprint('resources.courses', __name__)
