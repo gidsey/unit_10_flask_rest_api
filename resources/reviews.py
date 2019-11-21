@@ -1,8 +1,24 @@
-from flask import jsonify, Blueprint, abort
+from flask import jsonify, Blueprint
 
-from flask_restful import Resource, Api, reqparse, inputs
+from flask_restful import Resource, Api, reqparse, inputs,  fields, marshal, marshal_with, abort
 
 import models
+
+review_fields = {
+    'id': fields.Integer,
+    'course_id': fields.Integer,
+    'rating': fields.String,
+    'comment': fields.String
+}
+
+
+def review_or_404(review_id):
+    try:
+        review = models.Review.get(models.Review.id == review_id)
+    except models.Review.DoesNotExist:
+        abort(404, message='Review {} does not exist'.format(review_id))
+    else:
+        return review
 
 
 class ReviewList(Resource):
@@ -32,11 +48,12 @@ class ReviewList(Resource):
         super().__init__()
 
     def get(self):
-        return jsonify({'reviews': [{'course': 1, 'rating': 5}]})
+        reviews = [marshal(review, review_fields) for review in models.Review.select()]
+        # print(reviews)
+        return {'reviews': reviews}
 
     def post(self):
         args = self.reqparse.parse_args()
-
         models.Review.create(**args)
         # for value in args.values():
         #     print(value)
@@ -68,8 +85,9 @@ class Review(Resource):
         )
         super().__init__()
 
+    @marshal_with(review_fields)
     def get(self, id):
-        return jsonify({'course': 1, 'rating': 5})
+        return review_or_404(id)
 
     def put(self, id):
         args = self.reqparse.parse_args()
