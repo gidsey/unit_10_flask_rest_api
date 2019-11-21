@@ -1,4 +1,4 @@
-from flask import jsonify, Blueprint
+from flask import jsonify, Blueprint, url_for
 
 from flask_restful import Resource, Api, reqparse, inputs,  fields, marshal, marshal_with, abort
 
@@ -7,9 +7,16 @@ import models
 review_fields = {
     'id': fields.Integer,
     'course_id': fields.Integer,
-    'rating': fields.String,
-    'comment': fields.String
+    'for_course': fields.String,
+    'rating': fields.Integer,
+    'comment': fields.String(default=''),
+    'created_at': fields.DateTime
 }
+
+
+def add_course(review):
+    review.for_course = url_for('resources.courses.course', id=review.course.id)
+    return review
 
 
 def review_or_404(review_id):
@@ -48,46 +55,20 @@ class ReviewList(Resource):
         super().__init__()
 
     def get(self):
-        reviews = [marshal(review, review_fields) for review in models.Review.select()]
-        # print(reviews)
+        reviews = [marshal(add_course(review), review_fields) for review in models.Review.select()]
         return {'reviews': reviews}
 
+    @marshal_with(review_fields)
     def post(self):
         args = self.reqparse.parse_args()
-        models.Review.create(**args)
-        # for value in args.values():
-        #     print(value)
-        #     # print(value)
-        #
-        # try:
-        #     course = models.Course.get(models.Course.id == id)
-        # except models.DoesNotExist:
-        #     abort(404)
-        # else:
-        #     pass
-
-        return jsonify({'reviews': [{'course': 1, 'rating': 5}]})
+        reviews = models.Review.create(**args)
+        return add_course(reviews)
 
 
 class Review(Resource):
-    def __init__(self):
-        self.reqparse = reqparse.RequestParser()
-        self.reqparse.add_argument(
-            'rating',
-            required=True,
-            help="No course rating provided",
-            location=['form', 'json']
-        )
-        self.reqparse.add_argument(
-            'comment',
-            required=False,
-            location=['form', 'json']
-        )
-        super().__init__()
-
     @marshal_with(review_fields)
     def get(self, id):
-        return review_or_404(id)
+        return add_course(review_or_404(id))
 
     def put(self, id):
         args = self.reqparse.parse_args()
