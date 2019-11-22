@@ -44,7 +44,7 @@ api = Api(users_api)
 
 api.add_resource(
     UserList,
-    '/api/v1/users',
+    '/users',
     endpoint='users'
 )
 

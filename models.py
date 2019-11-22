@@ -61,5 +61,5 @@ class Review(Model):
 
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([Course, Review], safe=True)
+    DATABASE.create_tables([Course, Review, User], safe=True)
     DATABASE.close()
