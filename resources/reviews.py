@@ -105,7 +105,9 @@ class Review(Resource):
 
 
     def delete(self, id):
-        return jsonify({'course': 1, 'rating': 5})
+        query = models.Review.delete().where(models.Review.id == id)
+        query.execute()
+        return '', 204, {'location': url_for('resources.reviews.reviews')}
 
 
 reviews_api = Blueprint('resources.reviews', __name__)
