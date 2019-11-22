@@ -21,16 +21,15 @@ class User(Model):
         email = email.lower()
         try:
             cls.select().where(
-                (cls.email == email) | (cls.username**username)
-                .get()
-            )
+                (cls.email == email) | (cls.username ** username)
+            ).get()
         except cls.DoesNotExist:
             user = cls(username=username, email=email)
             user.password = user.set_password(password)
             user.save()
             return user
         else:
-            raise Exception("User with that username ot email already exists.")
+            raise Exception("User with that username or email already exists.")
 
     @staticmethod
     def set_password(password):
@@ -54,6 +53,7 @@ class Review(Model):
     rating = IntegerField()
     comment = TextField(default='')
     created_at = DateTimeField(default=datetime.datetime.now)
+    vreated_by = ForeignKeyField(User, related_name='review_set')
 
     class Meta:
         database = DATABASE
@@ -61,5 +61,5 @@ class Review(Model):
 
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([Course, Review, User], safe=True)
+    DATABASE.create_tables([User, Course, Review], safe=True)
     DATABASE.close()
