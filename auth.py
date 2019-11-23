@@ -7,10 +7,11 @@ import models
 basic_auth = HTTPBasicAuth()
 auth = basic_auth
 
+
 @basic_auth.verify_password
 def verify_password(email_or_username, password):
     try:
-        user = models.user.get(
+        user = models.User.get(
             (models.User.email == email_or_username)|
             (models.User.username == email_or_username)
         )

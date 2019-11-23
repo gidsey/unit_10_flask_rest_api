@@ -72,7 +72,6 @@ class ReviewList(Resource):
         return add_course(review), 201, {'location': url_for('resources.reviews.review', id=review.id)}
 
 
-
 class Review(Resource):
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
@@ -110,7 +109,7 @@ class Review(Resource):
         try:
             review = models.Review.select().where(
                 models.Review.created_by == g.user,
-                models.review.id == id
+                models.Review.id == id
             ).get()
         except models.Review.DoesNotExist:
             return make_response(json.dumps({'error': "That review does not exist or is not editable"}), 403)
@@ -125,7 +124,7 @@ class Review(Resource):
         try:
             review = models.Review.select().where(
                 models.Review.created_by == g.user,
-                models.review.id == id
+                models.Review.id == id
             ).get()
         except models.Review.DoesNotExist:
             return make_response(json.dumps({'error': "That review does not exist or is not editable"}), 403)
