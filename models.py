@@ -1,6 +1,9 @@
 import datetime
 
 from argon2 import PasswordHasher
+from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer,
+                          BadSignature, SignatureExpired)
+
 from peewee import *
 import config
 
@@ -30,6 +33,10 @@ class User(Model):
             return user
         else:
             raise Exception("User with that username or email already exists.")
+
+    @staticmethod
+    def verify_auth_token(token):
+        serializer = Serializer(config.SECRET_KEY)
 
     @staticmethod
     def set_password(password):

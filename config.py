@@ -1,2 +1,2 @@
 
-SECRET_KEY = 'hhdide<.83bjhsh2{&@@^Jnnwjklws;--09hdwjkhkjw'
+SECRET_KEY = 'hhdide<.83dfbjhsh2{&@@^Jnnwjklws;--09hdwjkhkjw'
