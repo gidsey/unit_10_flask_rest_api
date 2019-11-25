@@ -10,23 +10,23 @@ URIs relative to http://127.0.0.1:5000/api/v1/
 ### Users 
 Method    | Endpoint        |Data                   | Description              | Auth Req? | Rate Limited? 
 ----------|-----------------|-----------------------|--------------------------|----------------|--------
-|GET      | users           |                       | list all users           | No             |No           
-|POST     | users           |username<br>email<br>password<br>verify_password  | create user  | No |Yes
+|GET      | users           |                       | list all users           | ❌             | ❌           
+|POST     | users           |username<br>email<br>password<br>verify_password  | create user  | ❌ |✅
 
 ### Courses
 Method    | Endpoint        |Data                   | Description              | Auth Req? | Rate Limited? 
 ----------|-----------------|-----------------------|--------------------------|----------------|--------
-|GET      | courses         |                       | list all courses        | No              |No           
-|POST     | courses         |title<br>url           | create course           | Yes             |Yes
-|GET      | courses/id      |course_id              | course detail           | No              |No
-|PUT      | courses/id      |title<br>url           | edit course             | No               |Yes
+|GET      | courses         |                       | list all courses        | ❌              |❌           
+|POST     | courses         |title<br>url           | create course           | ✅             |✅
+|GET      | courses/id      |course_id              | course detail           | ❌              |❌
+|PUT      | courses/id      |title<br>url           | edit course             | ✅             |✅
 
 ### Reviews
 Method    | Endpoint        |Data                   | Description              | Auth Req? | Rate Limited? 
 ----------|-----------------|-----------------------|--------------------------|----------------|--------
-|GET      |  reviews        |                       | list all reviews        | No             |No           
-|GET      |  reviews/id     |review_id              | review detail            | No             |No
-
+|GET      |  reviews        |                       | list all reviews        | ❌             |❌           
+|GET      |  reviews/id     |review_id              | review detail            | ❌             |❌
+|POST| reviews|course_id<br>rating(1-5)<br>comment(optional)|create review as signed-in user|✅|✅
 
 ### Notes
 
