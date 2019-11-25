@@ -8,26 +8,17 @@ with Courses and Reviews models.
 URIs relative to http://127.0.0.1:5000/
 
 ### Anonymous users
-|Method   | HTTP Request                    |  Description |
-----------|:-------------------------------:|:---------------
-|GET      | api/v1/courses                  | returns list of all courses
-|GET      | api/v1/courses/<course_id>      | returns course detail
+Method    | Endpoint | Data                    | Description 
+---------|------------|----------------------|-------------
+|GET      | api/v1/courses    |              | returns list of all courses
+|GET      | api/v1/courses |course_id      | returns course detail
 
 
 ### Auhenticated users
-|Method   | HTTP Request                    |  Description |
-----------|:-------------------------------:|:---------------
-|POST     | api/v1/courses                  | creates a new couusre
-|           - title (required)      
-|          | - url (required)
-||
-|GET      | api/v1/courses/<course_id>      | returns course detail
+Method    | Endpoint    |Data                   | Description 
+---------|---------------|-------------------|-------------
+|POST     | api/v1/courses |title (required) <br>url (required)| creates a new couusre
 
-
-
-| abc | defghi |
-:-: | -----------:
-bar | baz
 
 
 ## Features
