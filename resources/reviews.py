@@ -97,7 +97,6 @@ class Review(Resource):
         )
         super().__init__()
 
-
     @marshal_with(review_fields)
     def get(self, id):
         return add_course(review_or_404(id))
@@ -111,6 +110,7 @@ class Review(Resource):
                 models.Review.created_by == g.user,
                 models.Review.id == id
             ).get()
+            print (review)
         except models.Review.DoesNotExist:
             return make_response(json.dumps({'error': "That review does not exist or is not editable"}), 403)
         query = review.update(**args)
