@@ -18,7 +18,7 @@ Method    | Endpoint        |Data                   | Description              |
 ----------|-----------------|-----------------------|--------------------------|----------------|--------
 |GET      | courses         |                       | list all courses        | ✖              |✖           
 |POST     | courses         |title<br>url           | create course           | ✔             |✔
-|GET      | courses/id      |course_id              | course detail           | ✖              |✖
+|GET      | courses/id      |             | course detail           | ✖              |✖
 |PUT      | courses/id      |title<br>url           | edit course             | ✔             |✔
 
 ### Reviews
@@ -26,7 +26,10 @@ Method    | Endpoint        |Data                   | Description              |
 ----------|-----------------|-----------------------|--------------------------|----------------|--------
 |GET      |  reviews        |                       | list all reviews        | ✖             |✖           
 |GET      |  reviews/id     |review_id              | review detail            | ✖             |✖
-|POST| reviews|course_id<br>rating(1-5)<br>comment(optional)|create review as signed-in user|✔|✔
+|POST| reviews|course<br>rating(1-5)<br>comment(optional)| create review as signed-in user|✔|✔
+|PUT| reviews/id|course<br>rating(1-5)<br>comment(optional)| edit review as signed-in user|✔|✔
+|DELETE| reviews/id|| immediately delete selcetd review |✔|✔
+
 
 ### Notes
 
