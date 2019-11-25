@@ -128,7 +128,7 @@ class Review(Resource):
             ).get()
         except models.Review.DoesNotExist:
             return make_response(json.dumps({'error': "That review does not exist or is not editable"}), 403)
-        query = review.delete()
+        query = review.delete_instance()
         query.execute()
         return '', 204, {'location': url_for('resources.reviews.reviews')}
 
