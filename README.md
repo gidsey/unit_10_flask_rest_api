@@ -14,18 +14,20 @@ URIs relative to http://127.0.0.1:5000/
 |GET      | api/v1/courses/<course_id>      | returns course detail
 
 
-### Auhenticated users only
+### Auhenticated users
 |Method   | HTTP Request                    |  Description |
 ----------|:-------------------------------:|:---------------
 |POST     | api/v1/courses                  | creates a new couusre
-|          | - title (required)      
+|           - title (required)      
 |          | - url (required)
 ||
 |GET      | api/v1/courses/<course_id>      | returns course detail
 
 
 
-
+| abc | defghi |
+:-: | -----------:
+bar | baz
 
 
 ## Features
