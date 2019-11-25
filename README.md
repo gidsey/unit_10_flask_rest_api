@@ -7,17 +7,21 @@ with Courses and Reviews models.
 ## Resources
 URIs relative to http://127.0.0.1:5000/
 
-### Anonymous users
-Method    | Endpoint | Data                    | Description 
----------|------------|----------------------|-------------
+### Users 
+Method    | Endpoint | Data                    | Description | Authentication required
+---------|------------|----------------------|-------------|--------------------------
 |GET      | api/v1/courses    |              | returns list of all courses
 |GET      | api/v1/courses |course_id      | returns course detail
+|GET      | api/v1/reviews   |              | returns list of all reviews
 
+### Courses
+Method    | Endpoint        |Data                   | Description              | Auth required  | Rate Limited 
+----------|-----------------|-----------------------|--------------------------|----------------|--------
+|GET      | api/v1/courses  |                       | list  all courses        | No             |No           
+|GET      | api/v1/courses  |course_id              | course detail            | No             |No
 
-### Auhenticated users
-Method    | Endpoint    |Data                   | Description 
----------|---------------|-------------------|-------------
-|POST     | api/v1/courses |title (required) <br>url (required)| creates a new couusre
+### Reviews
+
 
 
 
