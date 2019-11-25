@@ -5,22 +5,25 @@ An api built using [Flask-RESTful](https://flask-restful.readthedocs.io/en/lates
 with Courses and Reviews models.
 
 ## Resources
-URIs relative to http://127.0.0.1:5000/
+URIs relative to http://127.0.0.1:5000/api/v1/
 
 ### Users 
-Method    | Endpoint | Data                    | Description | Authentication required
----------|------------|----------------------|-------------|--------------------------
-|GET      | api/v1/courses    |              | returns list of all courses
-|GET      | api/v1/courses |course_id      | returns course detail
-|GET      | api/v1/reviews   |              | returns list of all reviews
+Method    | Endpoint        |Data                   | Description              | Authentication | Rate Limited 
+----------|-----------------|-----------------------|--------------------------|----------------|--------
+|GET      | users           |                       | list all users           | No             |No           
+|POST     | users           |username<br>email<br>password<br>verify_password | create user  | No |Yes
 
 ### Courses
-Method    | Endpoint        |Data                   | Description              | Auth required  | Rate Limited 
+Method    | Endpoint        |Data                   | Description              | Authentication | Rate Limited 
 ----------|-----------------|-----------------------|--------------------------|----------------|--------
-|GET      | api/v1/courses  |                       | list  all courses        | No             |No           
-|GET      | api/v1/courses  |course_id              | course detail            | No             |No
+|GET      | courses         |                       | list all courses        | No             |No           
+|GET      | courses/id      |course_id              | course detail            | No             |No
 
 ### Reviews
+Method    | Endpoint        |Data                   | Description              | Authentication | Rate Limited 
+----------|-----------------|-----------------------|--------------------------|----------------|--------
+|GET      |  reviews        |                       | list all reviews        | No             |No           
+|GET      |  reviews/id     |review_id              | review detail            | No             |No
 
 
 
