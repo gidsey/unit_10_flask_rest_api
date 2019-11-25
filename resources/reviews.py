@@ -9,7 +9,6 @@ import models
 
 review_fields = {
     'id': fields.Integer,
-    'course_id': fields.Integer,
     'for_course': fields.String,
     'rating': fields.Integer,
     'comment': fields.String(default=''),
@@ -98,6 +97,7 @@ class Review(Resource):
         )
         super().__init__()
 
+
     @marshal_with(review_fields)
     def get(self, id):
         return add_course(review_or_404(id))
@@ -128,13 +128,11 @@ class Review(Resource):
             ).get()
         except models.Review.DoesNotExist:
             return make_response(json.dumps({'error': "That review does not exist or is not editable"}), 403)
-        query = review.delete_instance()
-        query.execute()
+        review.delete_instance()
         return '', 204, {'location': url_for('resources.reviews.reviews')}
 
 
 reviews_api = Blueprint('resources.reviews', __name__)
-
 api = Api(reviews_api)
 api.add_resource(
     ReviewList,

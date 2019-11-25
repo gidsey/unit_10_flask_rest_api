@@ -20,6 +20,7 @@ Method    | Endpoint        |Data                   | Description              |
 |POST     | courses         |title<br>url           | create course           | ✔             |✔
 |GET      | courses/id      |             | course detail           | ✖              |✖
 |PUT      | courses/id      |title<br>url           | edit course             | ✔             |✔
+|DELETE   | courses/id      |                       | immediately delete selcetd course             | ✔             |✔
 
 ### Reviews
 Method    | Endpoint        |Data                   | Description              | Auth Req? | Rate Limited? 
@@ -36,7 +37,7 @@ Method    | Endpoint        |Data                   | Description              |
 Using Postman, submit a POST request to the /courses endpoint with new course information plus basic auth credentails 
 to replicate logging he user in.
 
-Once loggedin, go to /users/token to generate a token for that user. Set Auth to none and add token to the Authorization 
+Once logged-in, go to /users/token to generate a token for that user. Set Auth to none and add token to the Authorization 
 key in Postman to use as autentication method. 
 
 ## Features
