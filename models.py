@@ -71,7 +71,7 @@ class Review(Model):
     rating = IntegerField()
     comment = TextField(default='')
     created_at = DateTimeField(default=datetime.datetime.now)
-    vreated_by = ForeignKeyField(User, related_name='review_set')
+    created_by = ForeignKeyField(User, related_name='review_set')
 
     class Meta:
         database = DATABASE
