@@ -9,7 +9,6 @@ import models
 
 review_fields = {
     'id': fields.Integer,
-    'course_id': fields.Integer,
     'for_course': fields.String,
     'rating': fields.Integer,
     'comment': fields.String(default=''),
